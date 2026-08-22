@@ -1,7 +1,10 @@
 import { createServer } from "node:http";
 import { pathToFileURL } from "node:url";
 import { timingSafeEqual } from "node:crypto";
-import { buildServerEventResponse, loadHandoffConfig } from "./handoff.js";
+import { loadHandoffConfig } from "./handoff.js";
+import { buildIntegratedServerEventResponse } from "./vapi-handler.js";
+import { loadCalendarSettings } from "./calendar.js";
+import { loadMetaSettings } from "./meta.js";
 
 const MAX_BODY_BYTES = 1_000_000;
 
@@ -37,6 +40,10 @@ async function readJson(request) {
 export function createHandoffServer(env = process.env) {
   const config = loadHandoffConfig(env);
   const webhookToken = env.VAPI_WEBHOOK_TOKEN;
+  const integrationSettings = {
+    calendar: loadCalendarSettings(env),
+    meta: loadMetaSettings(env),
+  };
 
   return createServer(async (request, response) => {
     if (request.method === "GET" && request.url === "/health") {
@@ -54,7 +61,7 @@ export function createHandoffServer(env = process.env) {
     try {
       const event = await readJson(request);
       const message = event?.message ?? {};
-      const outcome = buildServerEventResponse(message, config);
+      const outcome = await buildIntegratedServerEventResponse(message, config, integrationSettings);
 
       // Do not log call audio, transcripts, phone numbers, or raw payloads.
       console.info(`[vapi] event=${message.type ?? "unknown"} status=${outcome.statusCode}`);
