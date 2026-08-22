@@ -1,5 +1,6 @@
 import { createGoogleCalendarBooking, loadCalendarSettings } from "./calendar.js";
 import { buildServerEventResponse, buildToolResults } from "./handoff.js";
+import { loadGoogleAdsSettings, recordGoogleAdsLead } from "./google-ads.js";
 import { loadMetaSettings, recordMetaLead } from "./meta.js";
 
 function parameters(toolCall) {
@@ -18,8 +19,10 @@ function toolResult(name, toolCallId, result) {
 
 export async function buildIntegratedToolResults(message, handoffConfig, settings, adapters = {}) {
   const calendarSettings = settings?.calendar ?? loadCalendarSettings();
+  const googleAdsSettings = settings?.googleAds ?? loadGoogleAdsSettings();
   const metaSettings = settings?.meta ?? loadMetaSettings();
   const createBooking = adapters.createBooking ?? createGoogleCalendarBooking;
+  const recordGoogleAds = adapters.recordGoogleAds ?? recordGoogleAdsLead;
   const recordLead = adapters.recordLead ?? recordMetaLead;
   const results = buildToolResults(message, handoffConfig);
   const toolCalls = Array.isArray(message?.toolWithToolCallList) ? message.toolWithToolCallList : [];
@@ -37,6 +40,41 @@ export async function buildIntegratedToolResults(message, handoffConfig, setting
       if (name === "record_meta_lead") {
         const lead = await recordLead(input, metaSettings);
         results.push(toolResult(name, toolCall.id, { status: "recorded", ...lead }));
+      }
+
+      if (name === "record_google_ads_lead") {
+        const lead = await recordGoogleAds(input, googleAdsSettings);
+        results.push(toolResult(name, toolCall.id, { status: "recorded", ...lead }));
+      }
+
+      if (name === "qualify_and_book_meeting") {
+        const booking = await createBooking(input, calendarSettings);
+        const attribution = input?.attribution && typeof input.attribution === "object"
+          ? input.attribution
+          : {};
+        const attributionResults = {};
+
+        if (input?.consentForAds === true && attribution.googleAds === true) {
+          try {
+            attributionResults.googleAds = { status: "recorded", ...await recordGoogleAds(input, googleAdsSettings) };
+          } catch (error) {
+            attributionResults.googleAds = { status: "unavailable", reason: error instanceof Error ? error.message : "Google Ads attribution failed." };
+          }
+        }
+
+        if (input?.consentForAds === true && attribution.metaAds === true) {
+          try {
+            attributionResults.metaAds = { status: "recorded", ...await recordLead(input, metaSettings) };
+          } catch (error) {
+            attributionResults.metaAds = { status: "unavailable", reason: error instanceof Error ? error.message : "Meta Ads attribution failed." };
+          }
+        }
+
+        results.push(toolResult(name, toolCall.id, {
+          status: "booked",
+          booking,
+          attribution: attributionResults,
+        }));
       }
     } catch (error) {
       results.push(toolResult(name, toolCall.id, {

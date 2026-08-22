@@ -80,3 +80,32 @@ test("returns booked and recorded tool results through Vapi tool calls", async (
   assert.deepEqual(JSON.parse(results[0].result), { status: "booked", id: "event-1", htmlLink: null });
   assert.deepEqual(JSON.parse(results[1].result), { status: "recorded", eventId: "lead-3", eventsReceived: 1 });
 });
+
+test("books a qualified meeting and records both ad platforms only with consent", async () => {
+  const results = await buildIntegratedToolResults({
+    toolWithToolCallList: [{
+      name: "qualify_and_book_meeting",
+      toolCall: {
+        id: "qualified-1",
+        parameters: {
+          consentForAds: true,
+          attribution: { googleAds: true, metaAds: true },
+          startTime: "2026-08-22T10:00:00.000Z",
+        },
+      },
+    }],
+  }, { routes: {}, fallback: null }, {}, {
+    createBooking: async () => ({ id: "event-2", htmlLink: null }),
+    recordGoogleAds: async () => ({ orderId: "lead-4" }),
+    recordLead: async () => ({ eventId: "lead-4", eventsReceived: 1 }),
+  });
+
+  assert.deepEqual(JSON.parse(results[0].result), {
+    status: "booked",
+    booking: { id: "event-2", htmlLink: null },
+    attribution: {
+      googleAds: { status: "recorded", orderId: "lead-4" },
+      metaAds: { status: "recorded", eventId: "lead-4", eventsReceived: 1 },
+    },
+  });
+});

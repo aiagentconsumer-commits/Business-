@@ -16,6 +16,8 @@ This repository contains a minimal Node.js service for routing Vapi AI-agent cal
 - `tool-calls` events for a `request_handoff` tool, returning structured tool results without exposing any secret.
 - `book_callback` tool calls by creating a Google Calendar callback event when Google OAuth credentials are configured.
 - `record_meta_lead` tool calls by sending a server-side Meta Conversions API `Lead` event after a qualified handoff.
+- `record_google_ads_lead` tool calls by uploading an offline Google Ads click conversion for an opted-in qualified lead.
+- `qualify_and_book_meeting` tool calls by creating a Calendar callback, then recording selected Google Ads and/or Meta Ads attribution only when ad-processing consent is supplied.
 - Optional Bearer-token verification using Vapi Custom Credentials.
 - `/health` for a deployment health check.
 
@@ -44,6 +46,12 @@ The service uses only Node.js built-ins. Node.js 20 or later is required.
 | `GOOGLE_CALENDAR_ID` | Calendar to receive callback bookings; `primary` is valid for the OAuth user’s primary calendar. |
 | `META_PIXEL_ID`, `META_ACCESS_TOKEN` | Meta Conversions API identifiers for server-side lead attribution. |
 | `META_GRAPH_API_VERSION` | Meta Graph API version, defaulting to `v25.0`. |
+| `GOOGLE_ADS_DEVELOPER_TOKEN` | Google Ads API developer token. |
+| `GOOGLE_ADS_CLIENT_ID`, `GOOGLE_ADS_CLIENT_SECRET`, `GOOGLE_ADS_REFRESH_TOKEN` | OAuth credentials with the Google Ads scope. |
+| `GOOGLE_ADS_CUSTOMER_ID` | Google Ads customer ID, without dashes. |
+| `GOOGLE_ADS_LOGIN_CUSTOMER_ID` | Optional manager-account ID, without dashes. |
+| `GOOGLE_ADS_CONVERSION_ACTION_ID` | Google Ads offline-conversion action configured for qualified leads. |
+| `GOOGLE_ADS_API_VERSION` | Google Ads API version, defaulting to `v25`. |
 
 A destination must be one of the Vapi-supported shapes below:
 
@@ -76,8 +84,12 @@ Configure the Vapi assistant with two additional function tools:
 |---|---|---|
 | `book_callback` | `startTime`, `durationMinutes`, `timeZone`, `name`, `email`, `department` | Creates a Calendar event with a callback title and optional attendee. |
 | `record_meta_lead` | `eventId`, `email`, `phone`, `eventSourceUrl`, `clientIpAddress`, `clientUserAgent`, `department` | Sends a server-side Meta `Lead` event; email and phone are SHA-256 hashed before transmission. |
+| `record_google_ads_lead` | `eventId`, `email`, `phone`, `gclid`, `eventTime`, `department`, `consentForAds` | Uploads an opted-in qualified lead through Google Ads `UploadClickConversions`; email and phone are SHA-256 hashed before transmission. |
+| `qualify_and_book_meeting` | Booking details plus `attribution: { googleAds, metaAds }` and `consentForAds` | Books the Calendar meeting first, then records the opted-in selected ad attribution. |
 
 The Calendar adapter uses the Google Calendar event-creation endpoint, which requires the Calendar OAuth scope and write access to the selected calendar [Google Calendar documentation](https://developers.google.com/workspace/calendar/api/guides/create-events). The Meta adapter sends a `Lead` event to the Conversions API `/events` edge with a deduplication `event_id`; keep that ID consistent if the same lead is also tracked in the browser [Meta documentation](https://developers.facebook.com/documentation/ads-commerce/conversions-api/using-the-api).
+
+Google Ads attribution uses the offline conversion upload service with the Google Ads OAuth scope. Create a conversion action compatible with lead/offline conversion uploads before enabling the tool, and retain the `gclid` from the initial landing session whenever available [Google Ads documentation](https://developers.google.com/google-ads/api/reference/rpc/v25/ConversionUploadService/UploadClickConversions).
 
 > Configure a public HTTPS endpoint, the Vapi bearer credential, and the external service credentials before enabling either Vapi tool in production. The service deliberately returns an unavailable result when a required integration is not configured, rather than silently recording incomplete data.
 
@@ -96,6 +108,8 @@ Service returns the configured sales destination
 ```
 
 For booked callbacks, the assistant invokes `book_callback` after collecting an agreed ISO 8601 start time and consent to schedule. For ad attribution, invoke `record_meta_lead` only after the caller has consented to the relevant follow-up and marketing processing.
+
+For the full ad-to-meeting workflow, use `qualify_and_book_meeting` only after the agent has confirmed the caller’s preferred appointment time and explicit advertising-data consent. The tool returns the booking result even if an opted-in attribution provider is temporarily unavailable, so the sales team does not lose the meeting.
 
 ## Safety notes
 

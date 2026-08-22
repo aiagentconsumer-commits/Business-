@@ -4,6 +4,7 @@ import { timingSafeEqual } from "node:crypto";
 import { loadHandoffConfig } from "./handoff.js";
 import { buildIntegratedServerEventResponse } from "./vapi-handler.js";
 import { loadCalendarSettings } from "./calendar.js";
+import { loadGoogleAdsSettings } from "./google-ads.js";
 import { loadMetaSettings } from "./meta.js";
 
 const MAX_BODY_BYTES = 1_000_000;
@@ -42,6 +43,7 @@ export function createHandoffServer(env = process.env) {
   const webhookToken = env.VAPI_WEBHOOK_TOKEN;
   const integrationSettings = {
     calendar: loadCalendarSettings(env),
+    googleAds: loadGoogleAdsSettings(env),
     meta: loadMetaSettings(env),
   };
 
