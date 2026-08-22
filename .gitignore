@@ -2,6 +2,11 @@
 .gradle/
 build/
 
+# Node.js handoff-service dependencies and local secrets
+node_modules/
+.env
+coverage/
+
 # Local configuration file (sdk path, etc)
 local.properties
 
