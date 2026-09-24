@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Suzlon Energy — powering a cleaner, more resilient world through wind, solar and storage." />
+  <title>Suzlon Energy | Powering a cleaner tomorrow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#16251d; --muted:#66766d; --cream:#f3f4ee; --paper:#fbfcf8; --line:#dbe1d8; --green:#0b6b4a; --lime:#c8ef45; --dark:#12372b; --orange:#f27e3f; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family:'DM Sans',sans-serif; color:var(--ink); background:var(--paper); }
+    h1,h2,h3,.brand,.eyebrow,.stat-value { font-family:'Space Grotesk',sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .container { width:min(1180px, calc(100% - 48px)); margin:0 auto; }
+    header { position:absolute; z-index:3; top:0; left:0; width:100%; color:#fff; }
+    .nav { height:88px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,.18); }
+    .brand { display:flex; align-items:center; gap:11px; font-size:22px; font-weight:600; letter-spacing:-.04em; }
+    .brand-mark { display:grid; place-items:center; width:34px; height:34px; border-radius:50%; background:var(--lime); color:var(--dark); font-size:18px; font-weight:700; }
+    .nav-links { display:flex; gap:30px; align-items:center; font-size:14px; color:rgba(255,255,255,.82); }
+    .nav-links a:hover { color:var(--lime); }
+    .nav-cta { display:flex; gap:10px; align-items:center; }
+    .button { border:0; padding:13px 18px; border-radius:100px; background:var(--lime); color:var(--dark); font-weight:700; font-size:13px; cursor:pointer; transition:.2s; }
+    .button:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(200,239,69,.18); }
+    .button.ghost { color:#fff; background:transparent; border:1px solid rgba(255,255,255,.35); }
+    .button.ghost:hover { background:rgba(255,255,255,.08); box-shadow:none; }
+    .hero { min-height:720px; display:flex; align-items:center; position:relative; overflow:hidden; color:#fff; background:linear-gradient(90deg,rgba(7,30,21,.9) 0%,rgba(7,30,21,.54) 46%,rgba(7,30,21,.15) 100%), url('hero-renewables.jpg') center/cover; }
+    .hero::after { content:''; position:absolute; inset:auto 0 0; height:160px; background:linear-gradient(transparent,var(--paper)); pointer-events:none; }
+    .hero-copy { width:min(670px,100%); padding-top:72px; position:relative; z-index:1; }
+    .eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:11px; font-weight:600; color:var(--lime); }
+    .hero h1 { max-width:660px; margin:18px 0; font-size:clamp(50px,7vw,88px); line-height:.98; letter-spacing:-.07em; font-weight:500; }
+    .hero p { max-width:520px; margin:0; color:rgba(255,255,255,.78); font-size:18px; line-height:1.6; }
+    .hero-actions { display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; }
+    .scroll-note { position:absolute; z-index:1; bottom:45px; right:0; display:flex; gap:10px; align-items:center; color:rgba(255,255,255,.65); font-size:12px; }
+    .scroll-note span { width:38px; height:1px; background:var(--lime); }
+    .intro { padding:72px 0 82px; display:grid; grid-template-columns:1.2fr 1fr; gap:100px; align-items:end; }
+    .intro h2 { font-weight:500; font-size:clamp(35px,4.5vw,61px); line-height:1.03; letter-spacing:-.06em; margin:18px 0 0; }
+    .intro-copy { color:var(--muted); font-size:17px; line-height:1.65; max-width:420px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-top:25px; border-top:1px solid var(--line); }
+    .stat-value { font-size:36px; letter-spacing:-.06em; color:var(--green); }
+    .stat-label { color:var(--muted); font-size:12px; margin-top:6px; }
+    .solutions { background:var(--cream); padding:88px 0 100px; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; margin-bottom:34px; gap:24px; }
+    .section-head h2 { font-size:clamp(32px,4vw,55px); font-weight:500; letter-spacing:-.06em; line-height:1; margin:14px 0 0; }
+    .section-head p { color:var(--muted); max-width:310px; line-height:1.5; margin:0; font-size:14px; }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card { min-height:310px; padding:26px; background:var(--paper); border:1px solid var(--line); display:flex; flex-direction:column; justify-content:space-between; transition:.25s; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 18px 30px rgba(18,55,43,.08); }
+    .card-icon { width:43px; height:43px; display:grid; place-items:center; border-radius:50%; background:#e8f5b6; color:var(--green); font-size:22px; }
+    .card h3 { font-size:25px; font-weight:500; letter-spacing:-.04em; margin:44px 0 8px; }
+    .card p { color:var(--muted); font-size:14px; line-height:1.55; margin:0; }
+    .card-link { color:var(--green); font-size:13px; font-weight:700; margin-top:18px; }
+    .impact { padding:110px 0; background:var(--dark); color:#fff; position:relative; overflow:hidden; }
+    .impact::before { content:'∞'; position:absolute; right:-20px; top:-100px; color:rgba(200,239,69,.09); font-size:500px; font-family:'Space Grotesk'; font-weight:700; line-height:1; }
+    .impact-grid { display:grid; grid-template-columns:1fr 1fr; gap:100px; position:relative; z-index:1; }
+    .impact h2 { font-size:clamp(38px,5vw,66px); font-weight:500; line-height:1; letter-spacing:-.07em; margin:15px 0 22px; }
+    .impact p { max-width:430px; color:rgba(255,255,255,.68); line-height:1.65; }
+    .impact-list { border-top:1px solid rgba(255,255,255,.2); }
+    .impact-row { padding:20px 0; border-bottom:1px solid rgba(255,255,255,.2); display:flex; align-items:center; justify-content:space-between; }
+    .impact-row strong { font-family:'Space Grotesk'; font-size:32px; color:var(--lime); letter-spacing:-.05em; }
+    .impact-row span { color:rgba(255,255,255,.75); font-size:14px; }
+    .assistant-wrap { padding:88px 0; }
+    .assistant { background:#e9f4d0; padding:46px; display:grid; grid-template-columns:1fr 1fr; gap:42px; align-items:center; }
+    .assistant h2 { font-size:clamp(34px,4vw,54px); line-height:1.02; font-weight:500; letter-spacing:-.06em; margin:14px 0; }
+    .assistant p { color:#56675b; max-width:410px; line-height:1.6; }
+    .assistant-box { background:var(--paper); border:1px solid #cbd9bb; padding:22px; box-shadow:0 12px 25px rgba(18,55,43,.07); }
+    .assistant-top { display:flex; align-items:center; gap:10px; padding-bottom:16px; border-bottom:1px solid var(--line); font-family:'Space Grotesk'; font-size:14px; font-weight:600; }
+    .pulse { width:9px; height:9px; border-radius:50%; background:#4fae60; box-shadow:0 0 0 5px #d5efd5; }
+    .chat { padding:18px 0 4px; min-height:135px; }
+    .bubble { padding:11px 14px; margin-bottom:11px; max-width:90%; font-size:13px; line-height:1.45; border-radius:3px 12px 12px 12px; background:#eef2eb; color:#4b5d50; }
+    .bubble.user { margin-left:auto; background:var(--green); color:#fff; border-radius:12px 3px 12px 12px; }
+    .chat-form { display:flex; border-top:1px solid var(--line); padding-top:15px; gap:8px; }
+    .chat-form input { border:0; outline:0; background:transparent; flex:1; font:inherit; font-size:13px; }
+    .chat-form button { border:0; background:var(--green); color:#fff; border-radius:50%; width:31px; height:31px; cursor:pointer; }
+    footer { padding:30px 0; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }
+    .footer-row { display:flex; justify-content:space-between; gap:20px; }
+    .mobile-menu { display:none; }
+    @media (max-width:800px) { .container { width:min(100% - 32px, 620px); } .nav-links { display:none; } .mobile-menu { display:block; color:#fff; background:none; border:0; font-size:24px; } .hero { min-height:680px; } .intro,.impact-grid,.assistant { grid-template-columns:1fr; gap:35px; } .intro { padding:60px 0; } .cards { grid-template-columns:1fr; } .section-head { display:block; } .section-head p { margin-top:18px; } .assistant { padding:28px; } .scroll-note { right:16px; } .footer-row { display:block; } .footer-row span { display:block; margin-top:8px; } }
+  </style>
+</head>
+<body>
+  <header><div class="container nav"><a href="#top" class="brand"><span class="brand-mark">S</span><span>SUZLON</span></a><nav class="nav-links"><a href="#solutions">Solutions</a><a href="#impact">Our impact</a><a href="#assistant">Energy guide</a><a href="#contact">Contact</a></nav><div class="nav-cta"><a class="button ghost" href="#assistant">Ask AI guide</a><button class="mobile-menu" aria-label="Open menu">☰</button></div></div></header>
+  <main id="top">
+    <section class="hero"><div class="container hero-copy"><div class="eyebrow">Energy for a better world</div><h1>Powering a cleaner tomorrow.</h1><p>Integrated renewable energy solutions for a world that’s ready to move forward — with wind at our core, and more possibilities on the horizon.</p><div class="hero-actions"><a class="button" href="#solutions">Explore our solutions <span>↗</span></a><a class="button ghost" href="#impact">See our impact</a></div></div><div class="container scroll-note"><span></span> Scroll to discover</div></section>
+    <section class="container intro"><div><div class="eyebrow">One ecosystem. Many possibilities.</div><h2>Renewable energy, made more complete.</h2></div><div><p class="intro-copy">From a single wind turbine to a fully integrated clean-energy system, we help businesses and communities build a more resilient future.</p><div class="stats"><div><div class="stat-value">30+</div><div class="stat-label">Years of renewable leadership</div></div><div><div class="stat-value">19.5 GW</div><div class="stat-label">Wind capacity installed</div></div><div><div class="stat-value">17+</div><div class="stat-label">Countries powered</div></div></div></div></section>
+    <section class="solutions" id="solutions"><div class="container"><div class="section-head"><div><div class="eyebrow">What we do</div><h2>Designed for the<br>energy transition.</h2></div><p>Smarter assets, connected intelligence and a partner who stays with you for the long run.</p></div><div class="cards"><article class="card"><div><div class="card-icon">↝</div><h3>Wind energy</h3><p>High-performance turbines engineered for more wind, more uptime and more value from every site.</p></div><a class="card-link" href="#assistant" data-prompt="Tell me about Suzlon wind turbines">Discover wind <span>↗</span></a></article><article class="card"><div><div class="card-icon">☼</div><h3>Solar power</h3><p>Unlock your land and rooftops with solar systems that complement wind and strengthen your energy mix.</p></div><a class="card-link" href="#assistant" data-prompt="How does Suzlon approach solar power?">Explore solar <span>↗</span></a></article><article class="card"><div><div class="card-icon">▣</div><h3>Battery storage</h3><p>Store clean power when it’s abundant and deploy it when your operations need it most.</p></div><a class="card-link" href="#assistant" data-prompt="What can battery storage do for my business?">See storage <span>↗</span></a></article></div></div></section>
+    <section class="impact" id="impact"><div class="container impact-grid"><div><div class="eyebrow">The difference we make</div><h2>Good energy<br>goes further.</h2><p>We believe progress is measured not just in megawatts, but in the communities, livelihoods and ecosystems that renewable energy helps thrive.</p><a class="button" href="#assistant">Talk to our team ↗</a></div><div class="impact-list"><div class="impact-row"><span>Clean energy generated</span><strong>44.7 Bn+</strong></div><div class="impact-row"><span>CO₂ emissions avoided</span><strong>36 Mn T</strong></div><div class="impact-row"><span>Turbines installed</span><strong>14,000+</strong></div><div class="impact-row"><span>People in our ecosystem</span><strong>8,500+</strong></div></div></div></section>
+    <section class="assistant-wrap" id="assistant"><div class="container assistant"><div><div class="eyebrow">Your energy guide</div><h2>Have a question? Start here.</h2><p>Our AI assistant can help you explore integrated energy systems, understand our sustainability goals, or find the right way to partner with Suzlon.</p></div><div class="assistant-box"><div class="assistant-top"><span class="pulse"></span> Suzlon Energy Guide <span style="margin-left:auto;color:#77917e;font-size:11px">ONLINE</span></div><div class="chat" id="chat"><div class="bubble">Hi, I’m your Suzlon Energy Guide. What would you like to explore?</div><div class="bubble user" id="starter">Wind, solar & storage</div></div><form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Ask about energy solutions..." autocomplete="off"/><button aria-label="Send message">↑</button></form></div></div></section>
+  </main>
+  <footer id="contact"><div class="container footer-row"><span>© 2026 Suzlon Energy. Powering a better world.</span><span>Renewable energy solutions · Sustainability · Partnerships</span></div></footer>
+  <script>
+    const form=document.getElementById('chatForm'), input=document.getElementById('chatInput'), chat=document.getElementById('chat');
+    const answers={wind:'Suzlon wind turbines combine high-efficiency design with lifecycle intelligence. Tell us your site location and goals, and we can help map the right next step.',solar:'Our solar approach is designed to work alongside wind, helping you build a more balanced and resilient renewable energy mix.',storage:'Battery storage helps shift clean power to when your operations need it. It can improve reliability, reduce peak costs and support a more flexible energy system.',partner:'We partner with businesses, communities and institutions at every stage — from feasibility and project development to long-term operations.'};
+    function addBubble(text,user=false){const b=document.createElement('div');b.className='bubble'+(user?' user':'');b.textContent=text;chat.appendChild(b);chat.scrollTop=chat.scrollHeight;}
+    function respond(text){const t=text.toLowerCase();let reply=answers.partner;if(t.includes('wind')||t.includes('turbine'))reply=answers.wind;else if(t.includes('solar'))reply=answers.solar;else if(t.includes('storage')||t.includes('battery'))reply=answers.storage;setTimeout(()=>addBubble(reply),350);}
+    form.addEventListener('submit',e=>{e.preventDefault();const text=input.value.trim();if(!text)return;addBubble(text,true);input.value='';respond(text);});
+    document.querySelectorAll('[data-prompt]').forEach(el=>el.addEventListener('click',()=>{input.value=el.dataset.prompt;input.focus();}));
+  </script>
+</body>
+</html>
+
+
