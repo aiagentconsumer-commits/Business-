@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      flex: 1;
+    }
+
+    .motif {
+      font-size: 12px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 40px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .chart-container {
+      height: 450px;
+      position: relative;
+    }
+
+    .implication-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .implication-card {
+      padding: 24px;
+      border: 1px solid #2A374A;
+    }
+
+    .implication-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #F4F1EA;
+    }
+
+    .implication-text {
+      font-size: 15px;
+      color: #8C9BB0;
+      line-height: 1.6;
+    }
+
+    .highlight-teal { color: #00E5FF; }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Win/loss dynamics: Competitive losses declining as differentiation holds</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="content-grid">
+      <div class="chart-container">
+        <canvas id="winLossChart"></canvas>
+      </div>
+      
+      <div class="implication-list">
+        <div class="implication-card">
+          <div class="implication-title">Rising "No Decision" Rates</div>
+          <div class="implication-text">Closed-lost due to "No Decision" rose to <span class="highlight-teal">18%</span>. Indicates a need for stronger ROI quantification earlier in the cycle.</div>
+        </div>
+        <div class="implication-card">
+          <div class="implication-title">Feature Gap Closes</div>
+          <div class="implication-text">Losses to "Product Feature Gap" dropped by <span class="highlight-teal">35%</span> following the v4.0 release, validating the product roadmap.</div>
+        </div>
+        <div class="implication-card">
+          <div class="implication-title">Pricing Resiliency</div>
+          <div class="implication-text">Win rates in mid-market remain high (42%) despite 10% price increase, showing strong value-to-price perception.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('winLossChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Q1 FY26', 'Q2 FY26', 'Q3 FY26 (Actual)'],
+        datasets: [{
+          label: 'Won',
+          data: [28, 30, 34],
+          backgroundColor: '#00E5FF',
+        }, {
+          label: 'Lost: Competitor',
+          data: [42, 38, 32],
+          backgroundColor: '#2A374A',
+        }, {
+          label: 'Lost: No Decision',
+          data: [15, 17, 18],
+          backgroundColor: '#FFB300',
+        }, {
+          label: 'Lost: Other',
+          data: [15, 15, 16],
+          backgroundColor: '#8C9BB0',
+        }]
+      },
+      options: {
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: '#F4F1EA', font: { family: 'Inter', size: 14 } }
+          },
+          tooltip: { enabled: true }
+        },
+        scales: {
+          y: {
+            stacked: true,
+            beginAtZero: true,
+            grid: { color: '#2A374A' },
+            ticks: { 
+              color: '#8C9BB0',
+              callback: function(value) { return value + '%'; }
+            }
+          },
+          x: {
+            stacked: true,
+            grid: { display: false },
+            ticks: { color: '#8C9BB0' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

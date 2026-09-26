@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      flex: 1;
+    }
+
+    .motif {
+      font-size: 12px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 40px;
+    }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      flex: 1;
+    }
+
+    .analysis-col {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .analysis-header {
+      font-size: 14px;
+      color: #8C9BB0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #2A374A;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .ind-teal { background: #00E5FF; }
+    .ind-amber { background: #FFB300; }
+    .ind-slate { background: #8C9BB0; }
+
+    .card {
+      padding: 24px;
+      background: #142033;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #F4F1EA;
+    }
+
+    .card-body {
+      font-size: 15px;
+      color: #8C9BB0;
+      line-height: 1.6;
+    }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Trend analysis: Momentum is durable, but execution risks are shifting</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="analysis-grid">
+      <div class="analysis-col">
+        <div class="analysis-header">
+          <div class="indicator ind-teal"></div>
+          Growth Momentum
+        </div>
+        <div class="card">
+          <div class="card-title">Enterprise Dominance</div>
+          <div class="card-body">The shift to Enterprise ($1M+ deals) is providing more predictable revenue but increasing the concentration risk. Q3 saw three major $2M+ closures.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Expansion Velocity</div>
+          <div class="card-body">Net Retention Rate (NRR) is trending upward (118% in NAMER). Upselling core users into the Enterprise Suite is the most efficient growth lever.</div>
+        </div>
+      </div>
+
+      <div class="analysis-col">
+        <div class="analysis-header">
+          <div class="indicator ind-amber"></div>
+          Operational Risks
+        </div>
+        <div class="card">
+          <div class="card-title">Late-Stage Slippage</div>
+          <div class="card-body">15% of deals forecast for Q3 slipped to Q4 due to procurement delays. The "standard" legal review period has extended from 14 to 22 days.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Talent Bottlenecks</div>
+          <div class="card-body">APAC underperformance is highly correlated with vacant Sales Engineer roles. Ramp time for new hires in EMEA is currently exceeding plan by 20%.</div>
+        </div>
+      </div>
+
+      <div class="analysis-col">
+        <div class="analysis-header">
+          <div class="indicator ind-slate"></div>
+          Market Shifts
+        </div>
+        <div class="card">
+          <div class="card-title">Competitive Pricing</div>
+          <div class="card-body">Competitors are aggressive in the mid-market segment. While our win rates are stable, discounting pressure is mounting to secure multi-year terms.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">ROI Scrutiny</div>
+          <div class="card-body">CFO-level sign-off is now required for 85% of all new business deals. Sales enablement must pivot toward "Economic Value" discovery.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+</body>
+</html>

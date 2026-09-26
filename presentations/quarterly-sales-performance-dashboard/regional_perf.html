@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 24px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+      overflow: hidden;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 16px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      line-height: 1.05;
+      flex: 1;
+      color: #F4F1EA;
+    }
+
+    .motif {
+      font-size: 11px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      margin-top: 6px;
+      white-space: nowrap;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 12px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      flex: 1;
+      align-items: start;
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .panel-header {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2A374A;
+    }
+
+    .chart-box {
+      height: 260px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding: 12px;
+      background: #142033;
+      gap: 12px;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-label { font-size: 11px; color: #8C9BB0; text-transform: uppercase; margin-bottom: 6px; }
+    .stat-value { font-size: 20px; font-weight: 600; color: #00E5FF; }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 12px;
+    }
+
+    /* Make canvas fill parent for consistent Chart.js sizing */
+    canvas { width: 100% !important; height: 100% !important; display: block; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Regional performance is concentrated, with North America driving 62% of revenue</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="content-grid">
+      <div class="panel">
+        <div class="panel-header">Revenue by Region ($M)</div>
+        <div class="chart-box">
+          <canvas id="regionChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="panel">
+        <div class="panel-header">Attainment to Plan (%)</div>
+        <div class="chart-box">
+          <canvas id="attainmentChart"></canvas>
+        </div>
+        
+        <div class="stat-row">
+          <div class="stat-item">
+            <div class="stat-label">Top Region</div>
+            <div class="stat-value">NAMER</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Fastest Growth</div>
+            <div class="stat-value">EMEA (+22%)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Recovery Plan</div>
+            <div class="stat-value">APAC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+
+  <script>
+    // Region Revenue Chart
+    const ctx1 = document.getElementById('regionChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['NAMER', 'EMEA', 'APAC', 'LATAM'],
+        datasets: [{
+          label: 'Actual Revenue',
+          data: [26.5, 10.2, 4.3, 1.8],
+          backgroundColor: '#00E5FF'
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        animation: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { color: '#2A374A' }, ticks: { color: '#8C9BB0' } },
+          y: { grid: { display: false }, ticks: { color: '#8C9BB0' } }
+        }
+      }
+    });
+
+    // Attainment Chart
+    const ctx2 = document.getElementById('attainmentChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['NAMER', 'EMEA', 'APAC', 'LATAM'],
+        datasets: [{
+          label: 'Attainment %',
+          data: [108, 92, 74, 88],
+          backgroundColor: function(context) {
+            const val = context.dataset.data[context.dataIndex];
+            return val >= 100 ? '#00E5FF' : (val < 80 ? '#FFB300' : '#8C9BB0');
+          }
+        }]
+      },
+      options: {
+        animation: false,
+        plugins: { 
+          legend: { display: false },
+          annotation: {
+            annotations: {
+              line1: { type: 'line', xMin: 100, xMax: 100, borderColor: '#F4F1EA', borderWidth: 2, borderDash: [6, 6] }
+            }
+          }
+        },
+        scales: {
+          x: { 
+            grid: { color: '#2A374A' }, 
+            ticks: { color: '#8C9BB0', callback: function(value) { return value + '%'; } },
+            min: 0, max: 120
+          },
+          y: { grid: { display: false }, ticks: { color: '#8C9BB0' } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

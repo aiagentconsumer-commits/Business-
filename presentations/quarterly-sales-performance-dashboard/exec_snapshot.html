@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    .slide-container { 
+      width: 1280px; 
+      height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 24px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      line-height: 1.05;
+      flex: 1;
+      color: #F4F1EA;
+    }
+
+    .motif {
+      font-size: 11px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 14px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: #2A374A;
+      border: 2px solid #2A374A;
+      flex: 1;
+      min-height: 0; /* allow proper shrinking */
+    }
+
+    .kpi-box {
+      background: #0B1320;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 0;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      color: #8C9BB0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .kpi-label i {
+      font-size: 14px;
+      color: #00E5FF;
+      width: 18px;
+      text-align: center;
+    }
+
+    .kpi-value {
+      font-size: 36px;
+      font-weight: 600;
+      color: #F4F1EA;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .kpi-trend {
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #00E5FF;
+    }
+
+    .trend-up { color: #00E5FF; }
+    .trend-down { color: #FFB300; }
+
+    .kpi-trend i { font-size: 12px; }
+
+    .kpi-description {
+      font-size: 13px;
+      color: #8C9BB0;
+      margin-top: 14px;
+      line-height: 1.3;
+    }
+
+    .source-note {
+      font-size: 11px;
+      color: #8C9BB0;
+      padding-top: 12px;
+    }
+
+    /* Tighter typography for long text wrapping */
+    .kpi-box .kpi-description,
+    .action-title {
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Executive snapshot: Revenue and win rates outpace quarterly plan</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="kpi-grid">
+      <!-- Row 1 -->
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-chart-line"></i> Total Revenue</div>
+          <div class="kpi-value">$42.8M</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +18% vs Q2</div>
+        </div>
+        <div class="kpi-description">Driven by strong expansion in Enterprise accounts and mid-market growth.</div>
+      </div>
+
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-bullseye"></i> Win Rate</div>
+          <div class="kpi-value">34.2%</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +4.1 pts vs Q2</div>
+        </div>
+        <div class="kpi-description">Improved qualification process led to higher conversion in late stages.</div>
+      </div>
+
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-filter"></i> Pipeline Coverage</div>
+          <div class="kpi-value">3.2x</div>
+          <div class="kpi-trend trend-down"><i class="fas fa-arrow-down"></i> -0.4x vs Q2</div>
+        </div>
+        <div class="kpi-description">Pipeline volume remains healthy but needs aggressive top-of-funnel injection.</div>
+      </div>
+
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-clock"></i> Sales Cycle</div>
+          <div class="kpi-value">84 Days</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-arrow-down"></i> -6 Days vs Q2</div>
+        </div>
+        <div class="kpi-description">Efficiency gains in legal and procurement review phases.</div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-users"></i> New Logos</div>
+          <div class="kpi-value">128</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +12 vs Q2</div>
+        </div>
+        <div class="kpi-description">Regional focus in EMEA delivered 40% of new customer acquisition.</div>
+      </div>
+
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-handshake"></i> Avg. Deal Size</div>
+          <div class="kpi-value">$334K</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +9% vs Q2</div>
+        </div>
+        <div class="kpi-description">Shift toward multi-year commitments boosting initial contract value.</div>
+      </div>
+
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-percentage"></i> Renewal Rate</div>
+          <div class="kpi-value">91.4%</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-minus"></i> Flat vs Q2</div>
+        </div>
+        <div class="kpi-description">Net retention remains strong despite competitive pressure in SMB.</div>
+      </div>
+
+      <div class="kpi-box">
+        <div>
+          <div class="kpi-label"><i class="fas fa-user-tie"></i> Quota Attainment</div>
+          <div class="kpi-value">78%</div>
+          <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +5 pts vs Q2</div>
+        </div>
+        <div class="kpi-description">Improving ramp-up speed for new hires; 85% of tenured reps at quota.</div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+</body>
+</html>

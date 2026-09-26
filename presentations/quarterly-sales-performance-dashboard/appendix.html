@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      flex: 1;
+    }
+
+    .motif {
+      font-size: 12px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 40px;
+    }
+
+    .appendix-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .term-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .term-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .term-name { font-weight: 600; color: #00E5FF; font-size: 16px; }
+    .term-def { font-size: 14px; color: #8C9BB0; line-height: 1.5; }
+
+    .instructions-panel {
+      padding: 30px;
+      background: #142033;
+      border: 1px dashed #00E5FF;
+    }
+
+    .panel-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #F4F1EA;
+    }
+
+    .panel-body {
+      font-size: 15px;
+      color: #8C9BB0;
+      line-height: 1.6;
+    }
+
+    .panel-body ul {
+      margin-top: 16px;
+      margin-left: 20px;
+    }
+
+    .panel-body li {
+      margin-bottom: 12px;
+    }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Metric definitions & data notes: Transitioning to production</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="appendix-grid">
+      <div class="term-list">
+        <div class="term-item">
+          <div class="term-name">Win Rate</div>
+          <div class="term-def">Calculated as (Total Won / Total Closed) by deal count within the reporting period. Excludes deals tagged as "Disqualified" or "Merged."</div>
+        </div>
+        <div class="term-item">
+          <div class="term-name">Pipeline Coverage</div>
+          <div class="term-def">Ratio of total weighted pipeline value to the remaining quarterly sales target.</div>
+        </div>
+        <div class="term-item">
+          <div class="term-name">Net Retention Rate (NRR)</div>
+          <div class="term-def">The percentage of recurring revenue retained from existing customers, including expansion and minus churn/downgrades.</div>
+        </div>
+        <div class="term-item">
+          <div class="term-name">Qualified Lead (SQL)</div>
+          <div class="term-def">A lead meeting BANT criteria (Budget, Authority, Need, Timeline) and accepted by Sales.</div>
+        </div>
+      </div>
+      
+      <div class="instructions-panel">
+        <div class="panel-title">Production Data Replacement</div>
+        <div class="panel-body">
+          This deck contains <strong>illustrative sample data</strong> for FY2026. To populate with live CRM figures:
+          <ul>
+            <li>Export the "Quarterly Sales Performance" report from Salesforce/HubSpot to CSV.</li>
+            <li>Map the CSV fields to the Chart.js data arrays in each slide's script tag.</li>
+            <li>Update the "Actual" vs "Forecast" labels in the Revenue and Regional slides.</li>
+            <li>Ensure currency conversions for APAC and EMEA are consistent with the corporate reporting rate ($1.00 USD).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Contact: Sales Operations Team (ops@example.com)</div>
+  </div>
+</body>
+</html>

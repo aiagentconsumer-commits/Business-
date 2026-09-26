@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      flex: 1;
+    }
+
+    .motif {
+      font-size: 12px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 40px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 40px;
+      flex: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      color: #8C9BB0;
+      font-size: 13px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #00E5FF;
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #2A374A;
+      font-size: 15px;
+    }
+
+    .prod-name { font-weight: 600; color: #F4F1EA; }
+    .data-val { font-family: 'Inter', sans-serif; }
+    .growth-pos { color: #00E5FF; }
+    .growth-neg { color: #FFB300; }
+
+    .chart-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .chart-container {
+      width: 320px;
+      height: 320px;
+      position: relative;
+    }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 20px;
+    }
+
+    .summary-text {
+      margin-top: 24px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #8C9BB0;
+      padding: 20px;
+      background: #142033;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Product mix is shifting toward higher-value Enterprise offers</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="content-grid">
+      <div class="table-panel">
+        <table>
+          <thead>
+            <tr>
+              <th>Product Line</th>
+              <th>Revenue (Q3)</th>
+              <th>YoY Growth</th>
+              <th>Gross Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="prod-name">Core Platform (SaaS)</td>
+              <td class="data-val">$24.2M</td>
+              <td class="growth-pos">+14%</td>
+              <td class="data-val">82%</td>
+            </tr>
+            <tr>
+              <td class="prod-name">Enterprise Suite</td>
+              <td class="data-val">$12.4M</td>
+              <td class="growth-pos">+28%</td>
+              <td class="data-val">78%</td>
+            </tr>
+            <tr>
+              <td class="prod-name">Managed Services</td>
+              <td class="data-val">$4.1M</td>
+              <td class="growth-pos">+8%</td>
+              <td class="data-val">45%</td>
+            </tr>
+            <tr>
+              <td class="prod-name">Professional Services</td>
+              <td class="data-val">$2.1M</td>
+              <td class="growth-neg">-4%</td>
+              <td class="data-val">32%</td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="summary-text">
+          <strong>Strategic Note:</strong> Enterprise Suite adoption is the primary engine of margin expansion. Professional services are being deprioritized in favor of partner-led implementations to protect overall profitability.
+        </div>
+      </div>
+      
+      <div class="chart-panel">
+        <div class="chart-container">
+          <canvas id="mixChart"></canvas>
+        </div>
+        <div style="font-size: 14px; color: #8C9BB0; text-align: center;">
+          Q3 Revenue Contribution by Category
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('mixChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Core Platform', 'Enterprise Suite', 'Managed Services', 'Professional Services'],
+        datasets: [{
+          data: [57, 29, 9, 5],
+          backgroundColor: ['#00E5FF', '#FFB300', '#8C9BB0', '#2A374A'],
+          borderWidth: 0,
+          hoverOffset: 4
+        }]
+      },
+      options: {
+        animation: false,
+        cutout: '70%',
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { color: '#F4F1EA', font: { family: 'Inter', size: 12 }, padding: 15 }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

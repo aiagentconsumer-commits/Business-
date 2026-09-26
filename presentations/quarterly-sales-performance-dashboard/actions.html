@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      flex: 1;
+    }
+
+    .motif {
+      font-size: 12px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 40px;
+    }
+
+    .actions-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex: 1;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 200px 200px;
+      align-items: center;
+      padding: 24px;
+      border: 1px solid #2A374A;
+      gap: 32px;
+    }
+
+    .action-num {
+      font-size: 48px;
+      font-family: 'Playfair Display', serif;
+      color: #2A374A;
+      line-height: 1;
+    }
+
+    .action-details {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .action-text { font-size: 20px; font-weight: 600; color: #F4F1EA; }
+    .action-desc { font-size: 14px; color: #8C9BB0; }
+
+    .tag {
+      padding: 8px 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .tag-owner { background: #142033; color: #00E5FF; border: 1px solid #00E5FF; }
+    .tag-impact { background: #142033; color: #FFB300; border: 1px solid #FFB300; }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Three moves for the next quarter: Secure the FY2026 goal</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="actions-container">
+      <div class="action-row">
+        <div class="action-num">01</div>
+        <div class="action-details">
+          <div class="action-text">Launch "Value-First" Sales Enablement</div>
+          <div class="action-desc">Deploy new ROI calculators and CFO-facing business case templates to counteract rising "No Decision" rates.</div>
+        </div>
+        <div class="tag tag-owner">Marketing / Ops</div>
+        <div class="tag tag-impact">High Revenue Impact</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-num">02</div>
+        <div class="action-details">
+          <div class="action-text">Accelerate APAC SE Recruitment</div>
+          <div class="action-desc">Fast-track hiring for 4 critical Sales Engineering roles in Singapore and Sydney to clear technical validation bottlenecks.</div>
+        </div>
+        <div class="tag tag-owner">HR / Sales Lead</div>
+        <div class="tag tag-impact">Medium Term Recovery</div>
+      </div>
+
+      <div class="action-row">
+        <div class="action-num">03</div>
+        <div class="action-details">
+          <div class="action-text">Implement Procurement Fast-Track</div>
+          <div class="action-desc">Standardize legal and security docs for Enterprise deals to reduce sales cycle by an estimated 10 days.</div>
+        </div>
+        <div class="tag tag-owner">Legal / Ops</div>
+        <div class="tag tag-impact">Efficiency Gain</div>
+      </div>
+    </div>
+
+    <div class="source-note">Strategic Priority Level: Critical</div>
+  </div>
+</body>
+</html>

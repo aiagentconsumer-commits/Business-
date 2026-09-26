@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html,body { height: 100%; background: #081019; }
+    body { display: flex; align-items: center; justify-content: center; font-family: 'Inter', sans-serif; color: #F4F1EA; }
+
+    .slide-container { 
+      width: 1280px; 
+      height: 720px;
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 24px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+      overflow: hidden;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      gap: 16px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      line-height: 1.05;
+      flex: 1;
+      color: #F4F1EA;
+    }
+
+    .motif {
+      font-size: 11px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 6px;
+      white-space: nowrap;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 20px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 36px;
+      align-items: start;
+      /* allow content area to use remaining height */
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .table-container {
+      max-height: 100%;
+      overflow: auto;
+      padding-right: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      table-layout: fixed;
+    }
+
+    thead th {
+      text-align: left;
+      padding: 10px 12px;
+      color: #8C9BB0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 13px;
+      border-bottom: 2px solid #00E5FF;
+      vertical-align: bottom;
+    }
+
+    tbody td {
+      padding: 12px;
+      border-bottom: 1px solid #2A374A;
+      color: #F4F1EA;
+      vertical-align: middle;
+      word-wrap: break-word;
+    }
+
+    .value-cell { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; }
+    .trend-up { color: #00E5FF; font-weight:600; }
+    .trend-down { color: #FFB300; font-weight:600; }
+
+    .narrative-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-height: 100%;
+      overflow: hidden;
+    }
+
+    .narrative-item {
+      padding: 16px;
+      background: #142033;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .narrative-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: #F4F1EA;
+    }
+
+    .narrative-body {
+      font-size: 13px;
+      color: #8C9BB0;
+      line-height: 1.45;
+    }
+
+    .source-note {
+      font-size: 11px;
+      color: #8C9BB0;
+      padding-top: 12px;
+    }
+
+    /* Reduce scrollbar width for aesthetics if present */
+    .table-container::-webkit-scrollbar { width: 8px; height: 8px; }
+    .table-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Pipeline health: Healthy coverage, but late-stage aging is increasing</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="content-grid">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Pipeline Stage</th>
+              <th>Value ($M)</th>
+              <th>Deals</th>
+              <th>QoQ Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Discovery / Qual</td>
+              <td class="value-cell">$42.5M</td>
+              <td>184</td>
+              <td class="trend-up">+12%</td>
+            </tr>
+            <tr>
+              <td>Proposal / POC</td>
+              <td class="value-cell">$38.2M</td>
+              <td>92</td>
+              <td class="trend-down">-4%</td>
+            </tr>
+            <tr>
+              <td>Technical Validation</td>
+              <td class="value-cell">$29.8M</td>
+              <td>56</td>
+              <td class="trend-up">+8%</td>
+            </tr>
+            <tr>
+              <td>Business Case / Procurement</td>
+              <td class="value-cell">$18.4M</td>
+              <td>32</td>
+              <td class="trend-up">+22%</td>
+            </tr>
+            <tr>
+              <td>Total Active Pipeline</td>
+              <td class="value-cell">$128.9M</td>
+              <td>364</td>
+              <td class="trend-up">+9%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="narrative-panel">
+        <div class="narrative-item">
+          <div class="narrative-header">Coverage Ratio at 3.2x</div>
+          <div class="narrative-body">While total volume supports the Q4 target, the distribution is heavily weighted toward Discovery. Top-of-funnel velocity is critical.</div>
+        </div>
+        <div class="narrative-item">
+          <div class="narrative-header">Aging Alert: Technical Validation</div>
+          <div class="narrative-body">Average time in the Tech Validation stage has increased by 12 days. Suggests a bottleneck in POC resource availability.</div>
+        </div>
+        <div class="narrative-item">
+          <div class="narrative-header">Deal Size Concentration</div>
+          <div class="narrative-body">Top 10 deals represent 35% of the total pipeline value, increasing dependency on Enterprise procurement timelines.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+</body>
+</html>

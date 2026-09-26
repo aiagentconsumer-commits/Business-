@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #0B1320; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+      color: #F4F1EA;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .action-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      flex: 1;
+    }
+
+    .motif {
+      font-size: 12px;
+      color: #FFB300;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #2A374A;
+      margin-bottom: 40px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 60px;
+      flex: 1;
+    }
+
+    .chart-container {
+      height: 450px;
+      position: relative;
+    }
+
+    .insights-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .insight-item {
+      border-left: 2px solid #00E5FF;
+      padding-left: 20px;
+    }
+
+    .insight-header {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #00E5FF;
+    }
+
+    .insight-body {
+      font-size: 16px;
+      color: #8C9BB0;
+      line-height: 1.6;
+    }
+
+    .source-note {
+      font-size: 12px;
+      color: #8C9BB0;
+      padding-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="header-row">
+      <h2 class="action-title">Revenue growth is accelerating, fueled by 18% QoQ expansion</h2>
+      <div class="motif">FY2026 SAMPLE DATA</div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="content-grid">
+      <div class="chart-container">
+        <canvas id="revenueChart"></canvas>
+      </div>
+      
+      <div class="insights-panel">
+        <div class="insight-item">
+          <div class="insight-header">Record Quarter</div>
+          <div class="insight-body">Q3 revenue hit $42.8M, representing the strongest sequential growth in two fiscal years.</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-header">Plan Attainment</div>
+          <div class="insight-body">Actual performance surpassed the Q3 target ($39.5M) by 8.3%, narrowing the FY gap.</div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-header">Projected Momentum</div>
+          <div class="insight-body">Early Q4 pacing suggests a high probability of hitting the $160M FY2026 revenue goal.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="source-note">Source: Illustrative Sales Ops Dashboard Export (FY2026 Sample)</div>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('revenueChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Q1 FY26', 'Q2 FY26', 'Q3 FY26 (Actual)', 'Q4 FY26 (Forecast)'],
+        datasets: [{
+          label: 'Actual Revenue ($M)',
+          data: [32.4, 36.2, 42.8, null],
+          backgroundColor: '#00E5FF',
+          borderColor: '#00E5FF',
+          borderWidth: 1
+        }, {
+          label: 'Target Revenue ($M)',
+          data: [31.5, 35.0, 39.5, 48.0],
+          type: 'line',
+          borderColor: '#FFB300',
+          borderWidth: 3,
+          pointBackgroundColor: '#FFB300',
+          fill: false,
+          tension: 0.1
+        }, {
+          label: 'Forecast Revenue ($M)',
+          data: [null, null, null, 50.2],
+          backgroundColor: 'rgba(0, 229, 255, 0.3)',
+          borderColor: '#00E5FF',
+          borderDash: [5, 5],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        animation: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#F4F1EA',
+              font: { family: 'Inter', size: 14 },
+              padding: 20
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: { color: '#2A374A' },
+            ticks: { 
+              color: '#8C9BB0',
+              callback: function(value) { return '$' + value + 'M'; }
+            }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#8C9BB0' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
